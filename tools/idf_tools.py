@@ -1060,7 +1060,10 @@ class IDFTool(object):
                 tool_error = True
             else:
                 if ver_str != version:
-                    warn(f'tool {self.name} version {version} is installed, but has reported version {ver_str}')
+                    if self.name == "esp-clang":
+                        self.versions_installed.append(version)
+                    else:
+                        warn(f'tool {self.name} version {version} is installed, but has reported version {ver_str}')
                 else:
                     self.versions_installed.append(version)
         if tool_error:
